@@ -2,6 +2,7 @@ import { motion } from "framer-motion"
 import { useState } from "react"
 import './Settimer.scss'
 import { Link } from "react-router-dom"
+import useTimer from 'easytimer-react-hook';
 
 
 const Settimer = () => {
@@ -63,6 +64,7 @@ const Settimer = () => {
             border: 'black 1px solid',
             fontWeight: 'bold',
            }}
+           onClick={() => timer.start()}
         >START TIMER</motion.button>
       
 
@@ -75,3 +77,5 @@ const Settimer = () => {
 }
 
 export default Settimer
+
+

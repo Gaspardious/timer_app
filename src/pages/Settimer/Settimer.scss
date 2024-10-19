@@ -58,13 +58,3 @@
   
 }
 
-input[type="checkbox"] {
-  width: 20px;
-  height: 20px;
-  cursor: pointer;
-  border: 10px solid black;
-
-    &:checked {
-        background-color: black;
-    }
-}

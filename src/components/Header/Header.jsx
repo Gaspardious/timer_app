@@ -1,22 +1,100 @@
-
+import { motion, stagger, useAnimate } from 'framer-motion'
+import { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom';
 import './Header.scss'
-import React from 'react'
+
 
 const Header = () => {
+  const [open, setOpen] = useState(false);
+  const [scope, animate] = useAnimate();
+  const staggerList = stagger(0.1, { startDelay: 0.25 });
+
+  const links = [
+    { label: 'HOME', path: '/' },
+    { label: 'SET TIMER ⏱️', path: '/settimer' },
+    { label: 'Timer: Analog', path: '/timeranalog' },
+    { label: 'Timer: Digital', path: '/timerdigital' },
+
+  ];
+
+  useEffect(() => {
+    animate(
+      ".ul_container",
+      {
+        y: open ? '0%' : '100%', 
+        opacity: open ? 1 : 0,
+      },
+      { 
+        type: "spring",
+        bounce: 0,
+        duration: 0.8,
+      }
+    );
+    animate(
+      ".li_container",
+      open ? { opacity: 1, scale: 1, x: 0 } : { opacity: 0, scale: 0.3, x: -50 },
+      
+      
+      { 
+        duration: 0.4,
+        delay: open ? staggerList : 0,
+      }
+    );
+  }, [open]);
+  
+
+
+
 
 
   return (
     <>
-      <header>
-        <svg className="menu_icon" width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect x="32" width="12" height="32" transform="rotate(90 32 0)" fill="#222222"/>
-          <rect x="32" y="14" width="8" height="32" transform="rotate(90 32 14)" fill="#222222"/>
-          <rect x="32" y="24" width="4" height="32" transform="rotate(90 32 24)" fill="#222222"/>
-          <rect x="32" y="30" width="2" height="32" transform="rotate(90 32 30)" fill="#222222"/>
-        </svg>
-      </header>
+      <div className='container' ref={scope}>
+
+    <motion.button 
+        className='button' 
+        initial={{ opacity: 0 }} 
+        animate={{ opacity: 1, scale: 1.2 }}
+        whileHover={{ scale: 1 }}
+        transition={{ duration: 1 }}
+        onClick={() => setOpen(!open)} 
+        whileTap={{scale:0.95}}
+    >
+      MENU
+    </motion.button>
+
+    <ul className='ul_container'>
+    {links.map((link, index) => (
+        <motion.li className='li_container' key={index}>
+          <Link 
+            to={link.path} 
+            onClick={() => setOpen(false)} 
+          >
+            {link.label}
+          </Link>
+        </motion.li>
+      ))}
+    </ul>
+
+
+    </div>
+
+
+
     </>
   )
 }
 
 export default Header
+
+
+
+
+
+
+
+
+
+
+
+
