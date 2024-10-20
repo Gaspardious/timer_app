@@ -1,13 +1,13 @@
 import { motion } from "framer-motion";
 import { useState, useContext } from "react";
 import './Settimer.scss';
-import { TimerContext } from "../../components/TimerContext/TimerContext"; // Ensure correct path
+import { TimerContext } from "../../components/TimerContext/TimerContext";
 import { useNavigate } from 'react-router-dom';
 
 const Settimer = () => {
-  const [count, setCount] = useState(0);
-  const { setTimer } = useContext(TimerContext); // Access context
-    const navigate = useNavigate();
+  const [count, setCount] = useState(0);  // Count is in minutes
+  const { setTimer } = useContext(TimerContext);  // Access context
+  const navigate = useNavigate();
 
   const increment = () => {
     if (count < 60) {
@@ -22,8 +22,8 @@ const Settimer = () => {
   };
 
   const handleStartTimer = () => {
-    setTimer(count * 60);  // Set the selected time in seconds
-    navigate('/timerdigital');  // Navigate to the Timerdigital component
+    setTimer(count * 60);  // Convert minutes to seconds and start the timer
+    navigate('/timerdigital');  // Navigate to Timerdigital component
   };
 
   return (
@@ -41,7 +41,7 @@ const Settimer = () => {
               {/* Increment Arrow */}
               <img className="arrow" src="/Vector(1).png" alt="timer" onClick={increment} />
             </section>
-            <p>minutes</p>
+            <p className="minutes">minutes</p>
           </div>
         </section>
 
@@ -65,7 +65,7 @@ const Settimer = () => {
             border: 'black 1px solid',
             fontWeight: 'bold',
           }}
-          onClick={handleStartTimer}  // Save the timer count in seconds
+          onClick={handleStartTimer}  // Save the timer count in seconds or start from 0
         >
           START TIMER
         </motion.button>

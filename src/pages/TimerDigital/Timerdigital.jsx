@@ -1,16 +1,15 @@
 import useTimer from 'easytimer-react-hook';
 import { useContext, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { TimerContext } from "../../components/TimerContext/TimerContext"; 
-import { useNavigate } from 'react-router-dom';
 import './timerdigital.scss';
 
 const Timerdigital = () => {
-  const { timer } = useContext(TimerContext);  // Access time from context
+  const { timer } = useContext(TimerContext);  // Access time from context (in seconds)
   const navigate = useNavigate();
   const [localTimer, isTargetAchieved] = useTimer({
-    countdown: false,  // Use timer value from context
-    target: { seconds: timer },  // Optional target for 2 minutes
+    countdown: timer > 0,  // Count down if timer > 0, count up if timer is 0
+    startValues: { seconds: timer },  // Use timer value from context (in seconds)
     updateWhenTargetAchieved: true,
   });
 
@@ -20,23 +19,26 @@ const Timerdigital = () => {
 
   return (
     <div className='timerdigital_container'>
-      <div>{localTimer.getTimeValues().toString()}</div>
+      <div className='timerdigital_count'>{localTimer.getTimeValues().toString()}</div>
       
-      <div>{isTargetAchieved ? navigate('/timeranalog') : 'Target not achieved'}</div>
+    <div>{isTargetAchieved ? navigate('/alarm') : 'Target not achieved'}</div>
 
-      <section>
-        {/* Use localTimer instead of timer */}
-        <button onClick={() => localTimer.start()}>START</button>
-        <button onClick={() => localTimer.stop()}>STOP</button>
-        <button onClick={() => localTimer.reset()}>RESET</button>
-        <button onClick={() => localTimer.pause()}>PAUSE</button>
+      <section className='btns'>
+        <button className='btn_ _start' onClick={() => localTimer.start()}>START</button>
+        <button className='btn_ _pause' onClick={() => localTimer.pause()}>PAUSE</button>
+        <button className='btn_ _stop' onClick={() => localTimer.stop()}>STOP</button>
+        <button className='btn_ _reset' onClick={() => localTimer.reset()}>RESET</button>
+
+     
+
       </section>
 
       <Link to="/settimer">
-      <button onClick={() => localTimer.stop()}>STOP TIMER</button>
+        <button>STOP TIMER</button>
       </Link>
     </div>
   );
 };
 
 export default Timerdigital;
+

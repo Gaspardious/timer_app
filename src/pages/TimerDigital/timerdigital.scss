@@ -11,3 +11,44 @@
   background-color: #333;
   gap: 1rem;
 }
+
+.timerdigital_count {
+  font-size: 5rem;
+  font-family: 'Orbitron', sans-serif;
+}
+
+.btns {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  gap: 20px;
+  margin-top: 50px;
+
+  .btn_ {
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: all 0.3s;
+
+    &._start {
+      background-color: #2ecc71;
+    }
+
+    &._pause {
+      background-color: #f1c40f;
+    }
+
+    &._reset {
+      background-color: #3cabe7;
+    }
+
+    &._stop {
+      background-color: #e74c3c;
+    }
+  }
+}

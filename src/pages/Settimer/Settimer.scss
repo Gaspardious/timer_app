@@ -41,20 +41,21 @@
     gap: 50px;
   }
 
-  p {
+  .minutes {
     font-size: 15px;
     color: rgba(0, 0, 0, 0.338);
+    margin-top: -20px;
   }
 
   .minutes_counter {
-    font-size: 90px;
-    color: black;
+    font-size: 8rem;
+    font-family: 'Orbitron', sans-serif;
+    color: rgb(0, 0, 0);
   }
 
   .arrow {
     cursor: pointer;
   }
-
-  
 }
+
 
