@@ -1,6 +1,7 @@
 import './timeranalog.scss'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
+import { TimerContext } from "../../components/TimerContext/TimerContext"; 
 
 
 

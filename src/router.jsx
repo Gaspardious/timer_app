@@ -4,13 +4,17 @@ import Home from "./pages/Home/Home.jsx";
 import Settimer from "./pages/Settimer/Settimer.jsx";
 import Timeranalog from "./pages/TimerAnalog/Timeranalog.jsx";
 import Timerdigital from "./pages/TimerDigital/Timerdigital.jsx";
-
+import { TimerContextProvider } from "./components/TimerContext/TimerContext.jsx";
 
 
 const router = createBrowserRouter([
     {
         path: "/",
-        element: <App />,
+        element: (
+            <TimerContextProvider>
+                <App />
+            </TimerContextProvider>
+        ),
         errorElement: <div>404</div>,
         children: [ 
             { path: "/", element: <Home />, index: true },

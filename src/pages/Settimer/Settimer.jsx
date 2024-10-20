@@ -1,81 +1,77 @@
-import { motion } from "framer-motion"
-import { useState } from "react"
-import './Settimer.scss'
-import { Link } from "react-router-dom"
-import useTimer from 'easytimer-react-hook';
-
+import { motion } from "framer-motion";
+import { useState, useContext } from "react";
+import './Settimer.scss';
+import { TimerContext } from "../../components/TimerContext/TimerContext"; // Ensure correct path
+import { useNavigate } from 'react-router-dom';
 
 const Settimer = () => {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
+  const { setTimer } = useContext(TimerContext); // Access context
+    const navigate = useNavigate();
 
   const increment = () => {
     if (count < 60) {
-      setCount(count + 1)
+      setCount(count + 1);
     }
-  }
+  };
 
   const decrement = () => {
     if (count > 0) {
-      setCount(count - 1)
+      setCount(count - 1);
     }
-  }
+  };
 
+  const handleStartTimer = () => {
+    setTimer(count * 60);  // Set the selected time in seconds
+    navigate('/timerdigital');  // Navigate to the Timerdigital component
+  };
 
   return (
     <>
-      <div
-        className="settimer_container"
-      >
-      <section className="settimer">
-        <div className="settime_section">
-          <section className="settime">
-            <img className="arrow" src="/Vector.png" alt="timer" onClick={decrement}
-             />
+      <div className="settimer_container">
+        <section className="settimer">
+          <div className="settime_section">
+            <section className="settime">
+              {/* Decrement Arrow */}
+              <img className="arrow" src="/Vector.png" alt="timer" onClick={decrement} />
 
-            <p className="minutes_counter">{count}</p>
+              {/* Timer Count */}
+              <p className="minutes_counter">{count}</p>
 
-            <img className="arrow" src="/Vector(1).png" alt="timer" onClick={increment}  />
-          </section>
-          <p>minutes</p>
-        </div>
-      </section>
+              {/* Increment Arrow */}
+              <img className="arrow" src="/Vector(1).png" alt="timer" onClick={increment} />
+            </section>
+            <p>minutes</p>
+          </div>
+        </section>
 
-
+        {/* Intervals Checkboxes */}
         <div>
-          <input type="checkbox"  />
+          <input type="checkbox" />
           <label> Intervals</label> <br />
-          <input type="checkbox"  />
+          <input type="checkbox" />
           <label> 5 min break / interval</label>
         </div>
 
-
-
-    
-        <motion.button className="timer_btn"
-          whileTap={{ 
-            scale: 0.9,
-           }}
-
-          whileHover={{ 
+        {/* Start Timer Button */}
+        <motion.button
+          className="timer_btn"
+          whileTap={{ scale: 0.9 }}
+          whileHover={{
             scale: 1.1,
             backgroundColor: 'rgba(238, 238, 238, 1)',
             color: 'rgba(0, 0, 0, 1)',
             boxShadow: '0px 0px 8px rgba(0, 0, 0, 0.1)',
             border: 'black 1px solid',
             fontWeight: 'bold',
-           }}
-           onClick={() => timer.start()}
-        >START TIMER</motion.button>
-      
-
-    
+          }}
+          onClick={handleStartTimer}  // Save the timer count in seconds
+        >
+          START TIMER
+        </motion.button>
       </div>
-
-
     </>
-  )
-}
+  );
+};
 
-export default Settimer
-
-
+export default Settimer;
