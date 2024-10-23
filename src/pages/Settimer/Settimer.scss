@@ -5,7 +5,7 @@
   align-items: center;
   justify-content: center;
   height: 100dvh;
-  background-color: rgba(238, 238, 238, 1);
+  background-color: #333;
 }
 
 .timer_btn {
@@ -18,8 +18,12 @@
   border-radius: 5px;
   cursor: pointer;
   font-size: 20px;
+  border: 1px solid white;
 }
 
+.checkboxes {
+color: white;
+}
 
 
 .settime_section {
@@ -43,18 +47,19 @@
 
   .minutes {
     font-size: 15px;
-    color: rgba(0, 0, 0, 0.338);
+    color: rgba(255, 255, 255, 0.701);
     margin-top: -20px;
   }
 
   .minutes_counter {
     font-size: 8rem;
     font-family: 'Orbitron', sans-serif;
-    color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
   }
 
   .arrow {
     cursor: pointer;
+    width: 40px;
   }
 }
 

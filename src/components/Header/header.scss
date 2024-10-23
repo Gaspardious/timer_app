@@ -1,17 +1,17 @@
 
 .container {
   position: relative;
-  background-color: rgb(238, 238, 238);
+  background-color: #333;
 }
 
 .button {
-  background-color: #000000;
-  color: #fff;
+  background-color: #ffffff;
+  color: #000000;
   padding: 5px 10px;
   border-radius: 5px;
   cursor: pointer;
   border: none;
-  margin: 10px;
+  margin: 20px;
   z-index: 5;  
 }
 
@@ -41,6 +41,20 @@
       text-decoration: none;
       color: #fff;
       font-size: 30px;
-      
   }
+  a:hover {
+    background-color: #8a8a8a;
+    padding: 10px;
+    border-radius: 15px 2px;
+  }
+}
+
+.close_btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  color: #fff;
+  font-size: 30px;
+  cursor: pointer;
+  z-index: 3;  // The close button is in front of the overlay
 }

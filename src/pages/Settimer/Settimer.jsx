@@ -5,7 +5,7 @@ import { TimerContext } from "../../components/TimerContext/TimerContext";
 import { useNavigate } from 'react-router-dom';
 
 const Settimer = () => {
-  const [count, setCount] = useState(0);  // Count is in minutes
+  const [count, setCount] = useState(5);  // Count is in minutes
   const { startTimer } = useContext(TimerContext);  // Access context
   const navigate = useNavigate();
 
@@ -33,13 +33,13 @@ const Settimer = () => {
           <div className="settime_section">
             <section className="settime">
               {/* Decrement Arrow */}
-              <img className="arrow" src="/Vector.png" alt="timer" onClick={decrement} />
+              <img className="arrow" src="/left-chevron.png" alt="timer" onClick={decrement} />
 
               {/* Timer Count */}
               <p className="minutes_counter">{count}</p>
 
               {/* Increment Arrow */}
-              <img className="arrow" src="/Vector(1).png" alt="timer" onClick={increment} />
+              <img className="arrow" src="/right-chevron.png" alt="timer" onClick={increment} />
             </section>
             <p className="minutes">minutes</p>
           </div>
@@ -48,9 +48,9 @@ const Settimer = () => {
         {/* Intervals Checkboxes */}
         <div>
           <input type="checkbox" />
-          <label> Intervals</label> <br />
+          <label className="checkboxes"> Intervals</label> <br />
           <input type="checkbox" />
-          <label> 5 min break / interval</label>
+          <label className="checkboxes"> 5 min break / interval</label>
         </div>
 
         {/* Start Timer Button */}
