@@ -23,6 +23,13 @@ export const TimerContextProvider = ({ children }) => {
     }
   };
 
+  const pauseTimer = () => {
+    if (localTimer) {
+      localTimer.pause();
+      setIsRunning(false);  // Mark as paused
+    }
+  };
+
   const stopTimer = () => {
     if (localTimer) {
       localTimer.stop();
@@ -37,7 +44,7 @@ export const TimerContextProvider = ({ children }) => {
   };
 
   return (
-    <TimerContext.Provider value={{ localTimer, isRunning, startTimer, stopTimer, resetTimer }}>
+    <TimerContext.Provider value={{ localTimer, isRunning, startTimer, pauseTimer, stopTimer, resetTimer }}>
       {children}
     </TimerContext.Provider>
   );

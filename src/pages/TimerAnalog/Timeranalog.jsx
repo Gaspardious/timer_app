@@ -5,23 +5,32 @@ import { motion } from 'framer-motion';
 import { TimerContext } from "../../components/TimerContext/TimerContext";
 
 const Timeranalog = () => {
-  const { localTimer, startTimer, stopTimer } = useContext(TimerContext);  // Access the shared localTimer instance from context
+  const { localTimer, startTimer, stopTimer, pauseTimer, resetTimer } = useContext(TimerContext);  // Access the shared localTimer instance from context
   const [secondsRotation, setSecondsRotation] = useState(0);
   const [minutesRotation, setMinutesRotation] = useState(0);
 
   useEffect(() => {
     if (!localTimer) return; // Make sure the timer is initialized
 
+    // Set initial rotation based on the current countdown values from localTimer when component mounts
+    const timeValues = localTimer.getTimeValues();
+    const initialSeconds = timeValues.seconds;
+    const initialMinutes = timeValues.minutes;
+
+    // Set initial rotation for seconds and minutes
+    setSecondsRotation((initialSeconds / 60) * 360);
+    setMinutesRotation((initialMinutes / 60) * 360);
+
     // Update the rotation of the hands based on the current time from localTimer
     const updateRotation = () => {
       const timeValues = localTimer.getTimeValues();
 
-      // Calculate the rotation for the second hand (0 to 360 degrees)
+      // Calculate the rotation for the second hand (0 to 360 degrees) for countdown
       const seconds = timeValues.seconds;
       const secondsDegree = (seconds / 60) * 360;
       setSecondsRotation(secondsDegree);
 
-      // Calculate the rotation for the minute hand (0 to 360 degrees)
+      // Calculate the rotation for the minute hand (0 to 360 degrees) for countdown
       const minutes = timeValues.minutes;
       const minutesDegree = (minutes / 60) * 360;
       setMinutesRotation(minutesDegree);
@@ -36,19 +45,20 @@ const Timeranalog = () => {
 
   return (
     <div className="stopwatch">
-
       <div className="ur">
-        {/* Animate the second hand */}
+        {/* Second hand */}
         <motion.div
           className="seconds"
-          animate={{ rotate: secondsRotation }}
-          transition={{ type: "spring", stiffness: 300, damping: 20 }}
+          style={{ rotate: secondsRotation }} // Set the initial rotation directly
+          animate={{ rotate: secondsRotation }} // Animate the updates
+          transition={{ type: "tween", ease: "linear", duration: 1 }} // Smooth ticking with a 1-second interval
         />
-        {/* Animate the minute hand */}
+        {/* Minute hand */}
         <motion.div
           className="minutes"
-          animate={{ rotate: minutesRotation }}
-          transition={{ type: "spring", stiffness: 300, damping: 20 }}
+          style={{ rotate: minutesRotation }} // Set the initial rotation directly
+          animate={{ rotate: minutesRotation }} // Animate the updates
+          transition={{ type: "tween", ease: "linear", duration: 1 }} // Smooth ticking with a 1-minute interval
         />
       </div>
 
@@ -66,9 +76,9 @@ const Timeranalog = () => {
         >
           START
         </motion.button>
-        <button className='btn_ _pause' onClick={() => localTimer.pause()}>PAUSE</button>
+        <button className='btn_ _pause' onClick={pauseTimer}>PAUSE</button>
         <button className='btn_ _stop' onClick={stopTimer}>STOP</button>
-        <button className='btn_ _reset' onClick={() => localTimer.reset()}>RESET</button>
+        <button className='btn_ _reset' onClick={resetTimer}>RESET</button>
       </section>
 
       <Link to="/settimer">

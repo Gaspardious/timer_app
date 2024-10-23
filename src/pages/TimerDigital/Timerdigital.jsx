@@ -5,7 +5,7 @@ import './timerdigital.scss';
 import { motion } from 'framer-motion';
 
 const Timerdigital = () => {
-  const { localTimer, isRunning, startTimer, stopTimer } = useContext(TimerContext);  // Access the timer and functions from context
+  const { localTimer, isRunning, startTimer, stopTimer, pauseTimer, resetTimer } = useContext(TimerContext);  // Access the timer and functions from context
   const [timeValues, setTimeValues] = useState(localTimer ? localTimer.getTimeValues().toString() : '00:00:00');
   const navigate = useNavigate();  // Access navigation to route to "/alarm"
 
@@ -64,13 +64,13 @@ const Timerdigital = () => {
             backgroundColor: 'black',
             border: '1px solid lightgreen',
           }}
-          onClick={() => startTimer(60)}  // Use startTimer to start the shared timer
+          onClick={() => startTimer(59)}  // Use startTimer to start the shared timer
         >
           START
         </motion.button>
-        <button className='btn_ _pause' onClick={() => localTimer.pause()}>PAUSE</button>
+        <button className='btn_ _pause' onClick={pauseTimer}>PAUSE</button>
         <button className='btn_ _stop' onClick={stopTimer}>STOP</button>
-        <button className='btn_ _reset' onClick={() => localTimer.reset()}>RESET</button>
+        <button className='btn_ _reset' onClick={resetTimer}>RESET</button>
       </section>
 
       <Link to="/settimer">

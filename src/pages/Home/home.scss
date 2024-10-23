@@ -6,11 +6,20 @@
     justify-content: center;
     height: 100vh;
     background-color: #000000ef;
+    text-decoration: none;
 
     p {
         color: white;
         font-size: 14px;
         font-family: PT Sans;
         margin-top: 5px;
+    }
+
+    a {
+        color: white;
+        font-size: 14px;
+        font-family: PT Sans;
+        margin-top: 5px;
+        text-decoration: none;
     }
 }
