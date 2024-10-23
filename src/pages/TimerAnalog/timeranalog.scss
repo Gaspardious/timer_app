@@ -20,6 +20,19 @@
     padding: 0;
   }
 
+  .clock-number {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform-origin: 0 0;  // Center the numbers correctly
+    font-size: 18px;  // Adjust the size of the numbers
+    width: 20px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
   .stopwatch p {
     font-size: 1rem;
     margin: 0;
@@ -27,42 +40,32 @@
   }
   
   .stopwatch .ur {
-    width: 200px;
-    height: 200px;
+    width: 350px;
+    height: 350px;
     border-radius: 50%;
     background-color: rgb(255, 255, 255);
     border: 3px solid black;
     position: relative;
-    margin: 100px;
+    margin: 50px;
   }
   
   .stopwatch .seconds {
     width: 2px;
-    height: 90px;
+    height: 150px;
     background-color: red;
     position: absolute;
     bottom: 50%;
     left: calc(50% - 1px);
     transform-origin: bottom center; /* Rotate from bottom center */
-    animation: time 60s linear infinite;
   }
   
   .stopwatch .minutes {
     width: 4px;
-    height: 70px;
+    height: 120px;
     background-color: black;
     position: absolute;
     bottom: 50%;
     left: calc(50% - 2px);
     transform-origin: bottom center; /* Rotate from bottom center */
-    animation: time 3600s linear infinite;
   }
   
-  @keyframes time {
-    from {
-      transform: rotate(0deg);
-    }
-    to {
-      transform: rotate(360deg);
-    }
-  }     

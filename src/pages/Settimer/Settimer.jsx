@@ -23,7 +23,7 @@ const Settimer = () => {
 
   const handleStartTimer = () => {
     startTimer(count * 60);  // timeInSeconds argument
-    navigate('/timerdigital');  // Navigate to Timerdigital component
+    navigate('/timeranalog');  // Navigate to Timerdigital component
   };
 
   return (

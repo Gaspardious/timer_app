@@ -5,25 +5,37 @@ import { motion } from 'framer-motion';
 import { TimerContext } from "../../components/TimerContext/TimerContext";
 
 const Timeranalog = () => {
-  const { timer } = useContext(TimerContext);  // Access the timer from context
+  const { localTimer, startTimer, stopTimer } = useContext(TimerContext);  // Access the shared localTimer instance from context
   const [secondsRotation, setSecondsRotation] = useState(0);
   const [minutesRotation, setMinutesRotation] = useState(0);
 
   useEffect(() => {
-    // Calculate the rotation for the second hand (0 to 360 degrees)
-    const seconds = timer % 60;
-    const secondsDegree = (seconds / 60) * 360;
-    setSecondsRotation(secondsDegree);
+    if (!localTimer) return; // Make sure the timer is initialized
 
-    // Calculate the rotation for the minute hand (0 to 360 degrees)
-    const minutes = Math.floor(timer / 60);
-    const minutesDegree = (minutes / 60) * 360;
-    setMinutesRotation(minutesDegree);
-  }, [timer]);
+    // Update the rotation of the hands based on the current time from localTimer
+    const updateRotation = () => {
+      const timeValues = localTimer.getTimeValues();
+
+      // Calculate the rotation for the second hand (0 to 360 degrees)
+      const seconds = timeValues.seconds;
+      const secondsDegree = (seconds / 60) * 360;
+      setSecondsRotation(secondsDegree);
+
+      // Calculate the rotation for the minute hand (0 to 360 degrees)
+      const minutes = timeValues.minutes;
+      const minutesDegree = (minutes / 60) * 360;
+      setMinutesRotation(minutesDegree);
+    };
+
+    // Update every second
+    const intervalId = setInterval(updateRotation, 1000);
+
+    // Cleanup interval on unmount
+    return () => clearInterval(intervalId);
+  }, [localTimer]);
 
   return (
     <div className="stopwatch">
-      <p>Analog stopwatch tied to useContext Timer with Framer Motion animation.</p>
 
       <div className="ur">
         {/* Animate the second hand */}
@@ -40,8 +52,38 @@ const Timeranalog = () => {
         />
       </div>
 
+      <section className='btns'>
+        <motion.button 
+          className='btn_ _start'
+          whileHover={{
+            scale: 1.1,
+            transition: { duration: 0.1 },
+            color: 'lightgreen',
+            backgroundColor: 'black',
+            border: '1px solid lightgreen',
+          }}
+          onClick={() => startTimer(60)}  // Use startTimer to start the shared timer
+        >
+          START
+        </motion.button>
+        <button className='btn_ _pause' onClick={() => localTimer.pause()}>PAUSE</button>
+        <button className='btn_ _stop' onClick={stopTimer}>STOP</button>
+        <button className='btn_ _reset' onClick={() => localTimer.reset()}>RESET</button>
+      </section>
+
       <Link to="/settimer">
-        <button>STOP TIMER</button>
+        <motion.button 
+          whileHover={{ 
+            scale: 1.1,
+            transition: { duration: 0.1 },
+            color: 'red',
+          }}
+          whileTap={{ scale: 0.9 }}
+          className='btn_stoptimer' 
+          onClick={stopTimer}
+        >
+          STOP TIMER
+        </motion.button>
       </Link>
     </div>
   );
