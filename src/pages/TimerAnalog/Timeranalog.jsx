@@ -19,7 +19,7 @@ const Timeranalog = () => {
       const { seconds, minutes } = localTimer.getTimeValues();
   
       // Calculate rotations based on seconds and minutes
-      const secondsDegree = 360- (seconds / 60) * 360;  // Correct calculation for seconds
+      const secondsDegree = 360 -(seconds / 60) * 360;  // Correct calculation for seconds
       const minutesDegree = (minutes / 60) * 360;  // Correct calculation for minutes
   
       // Set rotations without any unnecessary full rotation
