@@ -3,9 +3,9 @@ import React from 'react'
 
 const Footer = () => {
   return (
-    <div>
-
-    </div>
+    <footer>
+      <p className='footer_text'>Built by Dejan Gaspar</p>
+    </footer>
   )
 }
 

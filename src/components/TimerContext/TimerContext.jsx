@@ -1,57 +1,43 @@
 import { createContext, useState, useEffect } from 'react';
-import Timer from 'easytimer.js';  // Import easytimer.js directly
+import Timer from 'easytimer.js';
 
 export const TimerContext = createContext();
 
 export const TimerContextProvider = ({ children }) => {
-  const [timer, setTimer] = useState(0);  // Store the initial timer value in seconds
-  const [localTimer, setLocalTimer] = useState(null);  // Store the timer instance
-  const [isRunning, setIsRunning] = useState(false);  // Track whether the timer is running
+  const [localTimer, setLocalTimer] = useState(null);
+  const [isRunning, setIsRunning] = useState(false);
 
-  // Initialize the timer when the context is first rendered
   useEffect(() => {
     const newTimer = new Timer();
     setLocalTimer(newTimer);
 
-    // Start the timer if there's already a value in the timer state
-    if (timer > 0) {
-      newTimer.start({ countdown: true, startValues: { seconds: timer } });
-      setIsRunning(true);
-    }
-
     return () => {
-      newTimer.stop();  // Clean up when the component is unmounted
+      newTimer.stop(); // Cleanup timer when unmounting
     };
-  }, [timer]);
+  }, []);
 
-  // Function to start or resume the timer
   const startTimer = (timeInSeconds) => {
     if (localTimer) {
-      setTimer(timeInSeconds);
       localTimer.start({ countdown: true, startValues: { seconds: timeInSeconds } });
       setIsRunning(true);
     }
   };
 
-  // Function to stop the timer
   const stopTimer = () => {
     if (localTimer) {
       localTimer.stop();
-      setIsRunning(false);
+      setIsRunning(false); // Mark the timer as not running
     }
   };
 
-  // Function to pause the timer
-  const pauseTimer = () => {
+  const resetTimer = () => {
     if (localTimer) {
-      localTimer.pause();
-      setIsRunning(false);
+      localTimer.reset();
     }
   };
 
-  // Provide the timer and control functions in the context
   return (
-    <TimerContext.Provider value={{ localTimer, isRunning, startTimer, stopTimer, pauseTimer, setTimer, timer }}>
+    <TimerContext.Provider value={{ localTimer, isRunning, startTimer, stopTimer, resetTimer }}>
       {children}
     </TimerContext.Provider>
   );

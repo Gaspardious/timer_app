@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 
 const Settimer = () => {
   const [count, setCount] = useState(0);  // Count is in minutes
-  const { setTimer } = useContext(TimerContext);  // Access context
+  const { startTimer } = useContext(TimerContext);  // Access context
   const navigate = useNavigate();
 
   const increment = () => {
@@ -22,7 +22,7 @@ const Settimer = () => {
   };
 
   const handleStartTimer = () => {
-    setTimer(count * 60);  // Convert minutes to seconds and start the timer
+    startTimer(count * 60);  // timeInSeconds argument
     navigate('/timerdigital');  // Navigate to Timerdigital component
   };
 
@@ -65,7 +65,7 @@ const Settimer = () => {
             border: 'black 1px solid',
             fontWeight: 'bold',
           }}
-          onClick={handleStartTimer}  // Save the timer count in seconds or start from 0
+          onClick={handleStartTimer}  // Start timer when button is clicked
         >
           START TIMER
         </motion.button>

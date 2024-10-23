@@ -1,7 +1,7 @@
 import { motion, stagger, useAnimate } from 'framer-motion'
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom';
-import './Header.scss'
+import './header.scss'
 
 
 const Header = () => {

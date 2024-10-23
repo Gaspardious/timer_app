@@ -1,15 +1,17 @@
-import { Outlet } from "react-router-dom"
+import { Outlet, useLocation } from "react-router-dom"
 import Header from "./components/Header/Header"
 import Footer from "./components/Footer/Footer"
 
 function App() {
+  const location = useLocation()
+  const hideHeaderFooter = location.pathname === "/";
 
 
   return (
     <>
-      <Header />
+      {!hideHeaderFooter && <Header />}
       <Outlet />
-      <Footer />
+      {!hideHeaderFooter && <Footer />}
     </>
   )
 }
