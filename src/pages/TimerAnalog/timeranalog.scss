@@ -48,6 +48,29 @@
     position: relative;
     margin: 50px;
   }
+
+  .big-marker {
+    position: absolute;
+    width: 6px;
+    height: 30px;
+    background: black;
+    top: 10px; // Adjusted to be properly placed around the edge of the clock
+    left: 50%;
+    transform-origin: center 160px;
+    z-index: 1; 
+  }
+
+  // Small markers for seconds
+  .small-marker {
+    position: absolute;
+    width: 2px;
+    height: 15px;
+    background: grey;
+    top: 10px; // Adjusted to be properly placed around the edge of the clock
+    left: 50%;
+    transform-origin: center 160px; // Adjusted the origin to move the marker outwards
+  }
+  
   
   .stopwatch .seconds {
     width: 2px;
@@ -68,4 +91,5 @@
     left: calc(50% - 2px);
     transform-origin: bottom center; /* Rotate from bottom center */
   }
-  
+
+

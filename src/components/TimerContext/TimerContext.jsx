@@ -6,6 +6,7 @@ export const TimerContext = createContext();
 export const TimerContextProvider = ({ children }) => {
   const [localTimer, setLocalTimer] = useState(null);
   const [isRunning, setIsRunning] = useState(false);
+  const [totalSeconds, setTotalSeconds] = useState(0);
 
   useEffect(() => {
     const newTimer = new Timer();
@@ -19,6 +20,7 @@ export const TimerContextProvider = ({ children }) => {
   const startTimer = (timeInSeconds) => {
     if (localTimer) {
       localTimer.start({ countdown: true, startValues: { seconds: timeInSeconds } });
+      setTotalSeconds(timeInSeconds);
       setIsRunning(true);
     }
   };
@@ -44,7 +46,7 @@ export const TimerContextProvider = ({ children }) => {
   };
 
   return (
-    <TimerContext.Provider value={{ localTimer, isRunning, startTimer, pauseTimer, stopTimer, resetTimer }}>
+    <TimerContext.Provider value={{ localTimer, isRunning, startTimer, pauseTimer, stopTimer, resetTimer, totalSeconds }}>
       {children}
     </TimerContext.Provider>
   );
