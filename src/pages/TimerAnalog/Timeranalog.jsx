@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 import { TimerContext } from "../../components/TimerContext/TimerContext";
 
 const Timeranalog = () => {
-  const { localTimer, stopTimer, totalSeconds } = useContext(TimerContext);  // Access the shared localTimer instance from context
+  const { localTimer, stopTimer, totalSeconds, isIntervalChecked } = useContext(TimerContext);  // Access the shared localTimer instance from context
   const [secondsRotation, setSecondsRotation] = useState(0);
   const [minutesRotation, setMinutesRotation] = useState(0);
   const [secondsRemaining, setSecondsRemaining] = useState(0);
@@ -26,6 +26,9 @@ const Timeranalog = () => {
 
       setSecondsRemaining(remainingSeconds);
 
+
+
+
       const minutesDegree = (minutes / 60) * 360;  // Correct calculation for minutes
       setMinutesRotation(minutesDegree);  // Clockwise for minutes
     };
@@ -35,7 +38,11 @@ const Timeranalog = () => {
   
     // Listen for when the timer reaches zero and navigate to '/alarm'
     localTimer.addEventListener('targetAchieved', () => {
-      navigate('/alarm');
+      if (isIntervalChecked) {
+        navigate('/intervall');  // Navigate to /intervall if interval is selected
+      } else {
+        navigate('/alarm');  // Navigate to /alarm otherwise
+      }
     });
   
     // Cleanup interval and event listener on component unmount
@@ -70,9 +77,11 @@ const Timeranalog = () => {
   ));
 
 
+
+
   return (
     <div className="stopwatch">
-      <p className="time-remaining">{secondsRemaining} seconds remaining</p>
+      <p className="time_left">{secondsRemaining} seconds remaining</p>
       <div className="ur">
         {bigMarkers}
         {smallMarkers}

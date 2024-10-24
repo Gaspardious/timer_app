@@ -6,7 +6,8 @@ import Timeranalog from "./pages/TimerAnalog/Timeranalog.jsx";
 import Timerdigital from "./pages/TimerDigital/Timerdigital.jsx";
 import { TimerContextProvider } from "./components/TimerContext/TimerContext.jsx";
 import Alarm from "./pages/Alarm/Alarm.jsx";
-import AnalogTimer from "./pages/Analogtimer/Analogtimer.jsx";
+import Intervall from "./pages/Intervall/Intervall.jsx";
+import Timertext from "./pages/TimerText/Timertext.jsx";
 
 
 const router = createBrowserRouter([
@@ -24,11 +25,8 @@ const router = createBrowserRouter([
             { path: "/timeranalog", element: <Timeranalog />},
             { path: "/timerdigital", element: <Timerdigital />},
             { path: "/alarm", element: <Alarm />},
-            { path: "/analog", element: <AnalogTimer />},
-
-
-
-
+            { path: "/intervall", element: <Intervall />},
+            { path: "/timertext", element: <Timertext />},
         ]
     }
 ]);

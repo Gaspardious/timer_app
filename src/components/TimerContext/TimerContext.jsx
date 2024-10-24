@@ -7,24 +7,28 @@ export const TimerContextProvider = ({ children }) => {
   const [localTimer, setLocalTimer] = useState(null);
   const [isRunning, setIsRunning] = useState(false);
   const [totalSeconds, setTotalSeconds] = useState(0);
+  const [isIntervalChecked, setIsIntervalChecked] = useState(false);
 
   useEffect(() => {
     const newTimer = new Timer();
-    setLocalTimer(newTimer);
+    setLocalTimer(newTimer); // Set up the EasyTimer instance
 
     return () => {
       newTimer.stop(); // Cleanup timer when unmounting
     };
   }, []);
 
-  const startTimer = (timeInSeconds) => {
+  // Start the timer with the provided time and interval options
+  const startTimer = (timeInSeconds, intervalChecked) => {
     if (localTimer) {
       localTimer.start({ countdown: true, startValues: { seconds: timeInSeconds } });
       setTotalSeconds(timeInSeconds);
+      setIsIntervalChecked(intervalChecked);  // Store interval option
       setIsRunning(true);
     }
   };
 
+  // Pause the timer
   const pauseTimer = () => {
     if (localTimer) {
       localTimer.pause();
@@ -32,6 +36,7 @@ export const TimerContextProvider = ({ children }) => {
     }
   };
 
+  // Stop the timer completely
   const stopTimer = () => {
     if (localTimer) {
       localTimer.stop();
@@ -39,6 +44,7 @@ export const TimerContextProvider = ({ children }) => {
     }
   };
 
+  // Reset the timer
   const resetTimer = () => {
     if (localTimer) {
       localTimer.reset();
@@ -46,7 +52,7 @@ export const TimerContextProvider = ({ children }) => {
   };
 
   return (
-    <TimerContext.Provider value={{ localTimer, isRunning, startTimer, pauseTimer, stopTimer, resetTimer, totalSeconds }}>
+    <TimerContext.Provider value={{ localTimer, isRunning, startTimer, pauseTimer, stopTimer, resetTimer, totalSeconds, isIntervalChecked }}>
       {children}
     </TimerContext.Provider>
   );

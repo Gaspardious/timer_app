@@ -12,6 +12,13 @@
     color: black;
     text-align: center;
     position: relative;
+
+    .time_left {
+      font-size: 1.2rem;
+      color: white;
+
+    }
+  
   }
   
   .stopwatch h1 {
@@ -92,4 +99,5 @@
     transform-origin: bottom center; /* Rotate from bottom center */
   }
 
+  
 

@@ -14,6 +14,7 @@ const Header = () => {
     { label: 'SET TIMER ⏱️', path: '/settimer' },
     { label: 'Timer: Analog', path: '/timeranalog' },
     { label: 'Timer: Digital', path: '/timerdigital' },
+    { label: 'Timer: Text', path: '/timertext' },
   ];
 
   useEffect(() => {

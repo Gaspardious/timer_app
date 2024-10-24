@@ -5,7 +5,7 @@ import './timerdigital.scss';
 import { motion } from 'framer-motion';
 
 const Timerdigital = () => {
-  const { localTimer, isRunning, startTimer, stopTimer, pauseTimer, resetTimer } = useContext(TimerContext);  // Access the timer and functions from context
+  const { localTimer, isRunning, startTimer, stopTimer, pauseTimer, resetTimer, isIntervalChecked } = useContext(TimerContext);  // Access the timer and functions from context
   const [timeValues, setTimeValues] = useState(localTimer ? localTimer.getTimeValues().toString() : '00:00:00');
   const navigate = useNavigate();  // Access navigation to route to "/alarm"
 
@@ -27,11 +27,14 @@ const Timerdigital = () => {
     }
 
     // Listen for the "targetAchieved" event (when timer reaches zero)
-    if (localTimer) {
-      localTimer.addEventListener('targetAchieved', () => {
-        navigate('/alarm');
-      });
-    }
+    localTimer.addEventListener('targetAchieved', () => {
+      if (isIntervalChecked) {
+        navigate('/intervall');  // Navigate to /intervall if interval is selected
+      } else {
+        navigate('/alarm');  // Navigate to /alarm otherwise
+      }
+    });
+  
 
     // Cleanup: remove event listener when component unmounts or localTimer changes
     return () => {

@@ -5,7 +5,8 @@ import { TimerContext } from "../../components/TimerContext/TimerContext";
 import { useNavigate } from 'react-router-dom';
 
 const Settimer = () => {
-  const [count, setCount] = useState(5);  // Count is in minutes
+  const [count, setCount] = useState(1);  // Count is in minutes
+  const [isIntervalChecked, setIsIntervalChecked] = useState(false);
   const { startTimer } = useContext(TimerContext);  // Access context
   const navigate = useNavigate();
 
@@ -22,9 +23,17 @@ const Settimer = () => {
   };
 
   const handleStartTimer = () => {
-    startTimer(count * 60);  // timeInSeconds argument
-    navigate('/timeranalog');  // Navigate to Timerdigital component
+    startTimer(count * 60, isIntervalChecked);  // Pass interval selection to startTimer
+    navigate('/timeranalog');  // Navigate to Timeranalog component
   };
+
+  const handleCheckboxChange = () => {
+    setIsIntervalChecked(!isIntervalChecked);  // Toggle the checkbox state
+  };
+
+
+
+
 
   return (
     <>
@@ -47,10 +56,15 @@ const Settimer = () => {
 
         {/* Intervals Checkboxes */}
         <div>
-          <input type="checkbox" />
-          <label className="checkboxes"> Intervals</label> <br />
-          <input type="checkbox" />
-          <label className="checkboxes"> 5 min break / interval</label>
+          <input 
+            type="checkbox" 
+            id="interval-checkbox"
+            checked={isIntervalChecked}  
+            onChange={handleCheckboxChange} 
+          />
+          <label className="checkboxes" htmlFor="interval-checkbox">
+             Intervals - 5 min break
+          </label>
         </div>
 
         {/* Start Timer Button */}
