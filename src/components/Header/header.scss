@@ -2,17 +2,19 @@
 .container {
   position: relative;
   background-color: #333;
+  height: 5vh;
 }
 
 .button {
   background-color: #ffffff;
   color: #000000;
-  padding: 5px 10px;
+  padding: 7px 14px;
   border-radius: 5px;
   cursor: pointer;
   border: none;
-  margin: 20px;
-  z-index: 5;  
+  margin: 12px;
+  z-index: 5;
+  font-weight: bolder;
 }
 
 .ul_container {
