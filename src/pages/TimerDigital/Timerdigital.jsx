@@ -5,18 +5,15 @@ import './timerdigital.scss';
 import { motion } from 'framer-motion';
 
 const Timerdigital = () => {
-  const { localTimer, isRunning, startTimer, stopTimer, pauseTimer, resetTimer, isIntervalChecked } = useContext(TimerContext);  // Access the timer and functions from context
+  const { localTimer, isRunning, startTimer, stopTimer, pauseTimer, resetTimer, isIntervalChecked } = useContext(TimerContext); 
   const [timeValues, setTimeValues] = useState(localTimer ? localTimer.getTimeValues().toString() : '00:00:00');
-  const navigate = useNavigate();  // Access navigation to route to "/alarm"
+  const navigate = useNavigate();  
 
   useEffect(() => {
-    // Update the time values as the timer updates
     if (localTimer) {
       const intervalId = setInterval(() => {
         setTimeValues(localTimer.getTimeValues().toString());
       }, 1000);
-
-      // Clean up the interval when the component unmounts
       return () => clearInterval(intervalId);
     }
   }, [localTimer]);
@@ -26,17 +23,15 @@ const Timerdigital = () => {
       localTimer.start();
     }
 
-    // Listen for the "targetAchieved" event (when timer reaches zero)
+
     localTimer.addEventListener('targetAchieved', () => {
       if (isIntervalChecked) {
-        navigate('/intervall');  // Navigate to /intervall if interval is selected
+        navigate('/intervall');  
       } else {
-        navigate('/alarm');  // Navigate to /alarm otherwise
+        navigate('/alarm');  
       }
     });
   
-
-    // Cleanup: remove event listener when component unmounts or localTimer changes
     return () => {
       if (localTimer) {
         localTimer.removeEventListener('targetAchieved');
@@ -68,7 +63,7 @@ const Timerdigital = () => {
             scale: 1.1,
           }}
           whileTap={{ scale: 0.9}}
-          onClick={() => startTimer(59)}  // Use startTimer to start the shared timer
+          onClick={() => startTimer(59)} 
         >
           START
         </motion.button>
@@ -82,7 +77,7 @@ const Timerdigital = () => {
             scale: 1.1,
           }}
           whileTap={{ scale: 0.9}}
-          onClick={() => {pauseTimer}}  // Use startTimer to start the shared timer
+          onClick={() => {pauseTimer}}  
         >
           PAUSE
         </motion.button>
@@ -96,7 +91,7 @@ const Timerdigital = () => {
             scale: 1.1,
           }}
           whileTap={{ scale: 0.9}}
-          onClick={stopTimer} // Use startTimer to start the shared timer
+          onClick={stopTimer} 
         >
           STOP
         </motion.button>
@@ -110,7 +105,7 @@ const Timerdigital = () => {
             scale: 1.1,
           }}
           whileTap={{ scale: 0.9}}
-          onClick={resetTimer} // Use startTimer to start the shared timer
+          onClick={resetTimer} 
         >
           RESET
         </motion.button>

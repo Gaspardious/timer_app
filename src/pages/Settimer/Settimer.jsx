@@ -5,9 +5,9 @@ import { TimerContext } from "../../components/TimerContext/TimerContext";
 import { useNavigate } from 'react-router-dom';
 
 const Settimer = () => {
-  const [count, setCount] = useState(1);  // Count is in minutes
+  const [count, setCount] = useState(5);                                // Initial value of the timer
   const [isIntervalChecked, setIsIntervalChecked] = useState(false);
-  const { startTimer } = useContext(TimerContext);  // Access context
+  const { startTimer } = useContext(TimerContext); 
   const navigate = useNavigate();
 
   const increment = () => {
@@ -23,17 +23,13 @@ const Settimer = () => {
   };
 
   const handleStartTimer = () => {
-    startTimer(count * 60, isIntervalChecked);  // Pass interval selection to startTimer
-    navigate('/timeranalog');  // Navigate to Timeranalog component
+    startTimer(count * 60, isIntervalChecked);  
+    navigate('/timeranalog');  
   };
 
   const handleCheckboxChange = () => {
-    setIsIntervalChecked(!isIntervalChecked);  // Toggle the checkbox state
+    setIsIntervalChecked(!isIntervalChecked); 
   };
-
-
-
-
 
   return (
     <>
@@ -41,20 +37,14 @@ const Settimer = () => {
         <section className="settimer">
           <div className="settime_section">
             <section className="settime">
-              {/* Decrement Arrow */}
               <img className="arrow" src="/left-chevron.png" alt="timer" onClick={decrement} />
-
-              {/* Timer Count */}
               <p className="minutes_counter">{count}</p>
-
-              {/* Increment Arrow */}
               <img className="arrow" src="/right-chevron.png" alt="timer" onClick={increment} />
             </section>
             <p className="minutes">minutes</p>
           </div>
         </section>
 
-        {/* Intervals Checkboxes */}
         <div>
           <input 
             type="checkbox" 
@@ -67,7 +57,6 @@ const Settimer = () => {
           </label>
         </div>
 
-        {/* Start Timer Button */}
         <motion.button
           className="timer_btn"
           whileTap={{ scale: 0.9 }}
@@ -79,7 +68,7 @@ const Settimer = () => {
             border: 'black 1px solid',
             fontWeight: 'bold',
           }}
-          onClick={handleStartTimer}  // Start timer when button is clicked
+          onClick={handleStartTimer} 
         >
           START TIMER
         </motion.button>

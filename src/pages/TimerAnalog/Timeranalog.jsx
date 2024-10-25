@@ -5,47 +5,38 @@ import { motion } from 'framer-motion';
 import { TimerContext } from "../../components/TimerContext/TimerContext";
 
 const Timeranalog = () => {
-  const { localTimer, stopTimer, totalSeconds, isIntervalChecked } = useContext(TimerContext);  // Access the shared localTimer instance from context
+  const { localTimer, stopTimer, totalSeconds, isIntervalChecked } = useContext(TimerContext);  
   const [secondsRotation, setSecondsRotation] = useState(0);
   const [minutesRotation, setMinutesRotation] = useState(0);
   const [secondsRemaining, setSecondsRemaining] = useState(0);
   const totalSecondsleft = totalSeconds; 
-  const navigate = useNavigate();  // Access navigation to route to "/settimer"
+  const navigate = useNavigate();  
 
   useEffect(() => {
-    if (!localTimer) return; // Ensure the timer is initialized
+    if (!localTimer) return; 
   
-    // Helper function to calculate and set the rotation of the clock hands
     const updateRotation = () => {
       const { minutes } = localTimer.getTimeValues();
       const remainingSeconds = localTimer.getTotalTimeValues().seconds;
-      const completedRotations = Math.floor((totalSecondsleft - remainingSeconds) / 60);
-      const timeInCurrentLap = (totalSecondsleft - remainingSeconds) % 60; // Correct calculation for seconds
+      const completedRotations = Math.floor((totalSecondsleft - remainingSeconds) / 60); // change in the future to be more precise 
+      const timeInCurrentLap = (totalSecondsleft - remainingSeconds) % 60; 
       const newSecondRotation =  (timeInCurrentLap / 60) * 360 + completedRotations * 360;
       setSecondsRotation(newSecondRotation);
-
       setSecondsRemaining(remainingSeconds);
-
-
-
-
-      const minutesDegree = (minutes / 60) * 360;  // Correct calculation for minutes
-      setMinutesRotation(minutesDegree);  // Clockwise for minutes
+      const minutesDegree = (minutes / 60) * 360;  
+      setMinutesRotation(minutesDegree);  
     };
   
-    // Set interval to update rotation every second
     const intervalId = setInterval(updateRotation, 1000);
   
-    // Listen for when the timer reaches zero and navigate to '/alarm'
     localTimer.addEventListener('targetAchieved', () => {
       if (isIntervalChecked) {
-        navigate('/intervall');  // Navigate to /intervall if interval is selected
+        navigate('/intervall');  
       } else {
-        navigate('/alarm');  // Navigate to /alarm otherwise
+        navigate('/alarm');  
       }
     });
   
-    // Cleanup interval and event listener on component unmount
     return () => {
       clearInterval(intervalId);
       localTimer.removeEventListener('targetAchieved');
@@ -53,31 +44,21 @@ const Timeranalog = () => {
   }, [localTimer, navigate]);
 
 
-
-
-
-
-
-  // Create 12 big markers (for each hour)
-  const bigMarkers = Array.from({ length: 12 }, (_, index) => (
+  const bigMarkers = Array.from({ length: 12 }, (_, index) => (  //
     <div
-      key={`big-${index}`}
+      key={`big-${index}`} // Unique key for each marker (required by React) 
       className="big-marker"
-      style={{ transform: `rotate(${index * 30}deg) translateX(-50%)` }} // Correct rotation and position
+      style={{ transform: `rotate(${index * 30}deg) translateX(-50%)` }} // Rotate each marker by 30 degrees 
     />
   ));
 
-  // Create 60 small markers (for each second)
   const smallMarkers = Array.from({ length: 60 }, (_, index) => (
     <div
       key={`small-${index}`}
       className="small-marker"
-      style={{ transform: `rotate(${index * 6}deg) translateX(-50%)` }} // Correct rotation and position
+      style={{ transform: `rotate(${index * 6}deg) translateX(-50%)` }} 
     />
   ));
-
-
-
 
   return (
     <div className="stopwatch">
@@ -88,19 +69,17 @@ const Timeranalog = () => {
             
         <motion.div
           className="minutes"
-          style={{ originY: 1 }} // Set the initial rotation directly
-          animate={{ rotate: minutesRotation }} // Animate the updates
-          transition={{ type: "spring", duration: 1 }} // Smooth ticking with a 1-minute interval
+          style={{ originY: 1 }} 
+          animate={{ rotate: minutesRotation }} 
+          transition={{ type: "spring", duration: 1 }} 
         />
         <motion.div
           className="seconds"
-          style={{ originY: 1 }} // Set the initial rotation directly
-          animate={{ rotate: secondsRotation }} // Animate the updates
-          transition={{ type: "spring", duration: 1 }} // Smooth ticking with a 1-second interval
+          style={{ originY: 1 }} 
+          animate={{ rotate: secondsRotation }} 
+          transition={{ type: "spring", duration: 1 }} 
         />
       </div>
-
-
 
       <Link to="/settimer">
         <motion.button 
