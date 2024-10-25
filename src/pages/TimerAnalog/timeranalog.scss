@@ -58,7 +58,7 @@
 
   .big-marker {
     position: absolute;
-    width: 6px;
+    width: 3px;
     height: 30px;
     background: black;
     top: 10px; // Adjusted to be properly placed around the edge of the clock
@@ -70,7 +70,7 @@
   // Small markers for seconds
   .small-marker {
     position: absolute;
-    width: 2px;
+    width: 3px;
     height: 15px;
     background: grey;
     top: 10px; // Adjusted to be properly placed around the edge of the clock
@@ -81,7 +81,7 @@
   
   .stopwatch .seconds {
     width: 2px;
-    height: 150px;
+    height: 125px;
     background-color: red;
     position: absolute;
     bottom: 50%;
