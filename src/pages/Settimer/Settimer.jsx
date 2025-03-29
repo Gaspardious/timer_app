@@ -72,7 +72,12 @@ const Settimer = () => {
         >
           START TIMER
         </motion.button>
+        <p className='portfolio'>
+      Portfolio: <a className='link_portfolio' href="https://gaspardev.com/" target="_blank" rel="noopener noreferrer">GasparDev</a>
+    </p>    
       </div>
+
+      
     </>
   );
 };

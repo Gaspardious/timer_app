@@ -52,8 +52,7 @@ const Header = () => {
 
   return (
     <>
-      <div className='container' ref={scope}>
-
+      <div className='container' ref={scope}> 
     <motion.button 
         className='button' 
         initial={{ opacity: 0 }} 

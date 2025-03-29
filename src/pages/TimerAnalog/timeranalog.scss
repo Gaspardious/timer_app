@@ -18,6 +18,24 @@
       color: white;
 
     }
+
+    .portfolio {
+      color: #fff;
+      font-size: 12px;
+      cursor: pointer;
+      padding-top: 50px;
+    }
+    
+    .link_portfolio {
+      font-size: 12px;
+      cursor: pointer;
+      color: #fff;
+    }
+    
+    .link_portfolio:hover {
+      text-decoration: underline;
+      color: #ffbb33;
+    }
   
   }
   

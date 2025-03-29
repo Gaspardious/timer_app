@@ -1,5 +1,5 @@
 import './intervall.scss';
-import React, { useEffect, useContext, useState } from 'react';
+import { useEffect, useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import Timer from 'easytimer.js';

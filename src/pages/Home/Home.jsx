@@ -24,7 +24,10 @@ const Home = () => {
       <Link to='/settimer'>
         <p>For all your timing needs</p>
       </Link>
-    </div>
+
+
+
+</div>
   )
 }
 

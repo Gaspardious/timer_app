@@ -29,4 +29,22 @@
         background-color: #000000;
         margin-top: 70px;
     }
+
+    .portfolio {
+        color: #fff;
+        font-size: 12px;
+        cursor: pointer;
+        padding-top: 50px;
+      }
+      
+      .link_portfolio {
+        font-size: 12px;
+        cursor: pointer;
+        color: #fff;
+      }
+      
+      .link_portfolio:hover {
+        text-decoration: underline;
+        color: #ffbb33;
+      }
 }
